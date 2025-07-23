@@ -26,6 +26,32 @@ const HomePage = () => {
             勉強だけでなく、自然体験やものづくり、地域の方々との交流など、
             さまざまな体験を通じて、子どもたちの可能性を広げます。
           </p>
+          
+          <div css={studentCountContainer}>
+            <h3>2025年度 在籍人数</h3>
+            <div css={studentCountGrid}>
+              {[
+                { grade: '1年生', count: 3, isTotal: false },
+                { grade: '2年生', count: 4, isTotal: false },
+                { grade: '3年生', count: 4, isTotal: false },
+                { grade: '4年生', count: 3, isTotal: false },
+                { grade: '5年生', count: 6, isTotal: false },
+                { grade: '6年生', count: 4, isTotal: false },
+                { grade: '合計', count: 24, isTotal: true }
+              ].map((item, index) => (
+                <div 
+                  key={index} 
+                  css={[
+                    studentCountItem, 
+                    ...(item.isTotal ? [totalCountItem] : [])
+                  ]}
+                >
+                  <span>{item.grade}</span>
+                  <span>{item.count}名</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -293,10 +319,66 @@ const sectionTitle = css`
 `;
 
 const sectionText = css`
+  font-size: 1.1rem;
+  line-height: 1.8;
   max-width: 800px;
   margin: 0 auto 2rem;
+  color: ${colors.text};
+`;
+
+const studentCountContainer = css`
+  background-color: ${colors.lightBeige};
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+  h3 {
+    text-align: center;
+    color: ${colors.darkGreen};
+    margin-bottom: 1.2rem;
+    font-size: 1.3rem;
+  }
+`;
+
+const studentCountGrid = css`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+`;
+
+const studentCountItem = css`
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
   text-align: center;
-  line-height: 1.8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  
+  span:first-of-type {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  
+  span:last-child {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: ${colors.softGreen};
+  }
+`;
+
+const totalCountItem = css`
+  grid-column: 1 / -1;
+  background: ${colors.softGreen};
+  color: white;
+  
+  span:last-child {
+    color: white;
+    font-size: 1.6rem;
+  }
 `;
 
 const activityGrid = css`
